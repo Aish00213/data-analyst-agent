@@ -1,0 +1,9 @@
+groq
+python-dotenv
+pandas
+openpyxl
+fastapi
+uvicorn
+streamlit
+requests
+matplotlib
