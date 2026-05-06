@@ -1,0 +1,16 @@
+# Environment
+env/
+agentenv/
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Data and outputs (too large for GitHub)
+data/
+outputs/
+
+# VS Code
+.vscode/
