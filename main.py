@@ -8,9 +8,12 @@ from tools.chart_generate import save_chart
 FILENAME = "business-financial-data-december-2025-quarter.csv"
 MAX_ITERATIONS = 10
 
-def run_agent(user_query: str, messages: list = None):
+def run_agent(user_query: str, messages: list = None, filename: str = None):
     if messages is None:
         messages = []
+
+    # use filename if provided, otherwise fall back to FILENAME constant
+    active_file = filename if filename else FILENAME
 
     print(f"\n{'='*60}")
     print(f"Query: {user_query}")
@@ -30,15 +33,15 @@ def run_agent(user_query: str, messages: list = None):
 
         if parsed["tool"] is None:
             print("✅ Agent finished.")
-            return messages  # ← return messages, not response
+            return messages
 
         if parsed["tool"] == "READ_FILE":
-            print(f"🔧 Tool: READ_FILE — {FILENAME}")
-            tool_output = read_file(FILENAME)
+            print(f"🔧 Tool: READ_FILE — {active_file}")
+            tool_output = read_file(active_file)
 
         elif parsed["tool"] == "EXECUTE_CODE":
             print(f"🔧 Tool: EXECUTE_CODE")
-            tool_output = execute_code(parsed["code"], FILENAME)
+            tool_output = execute_code(parsed["code"], active_file)
 
         elif parsed["tool"] == "SAVE_CHART":
             fname = parsed.get("filename", "chart.png")
@@ -56,12 +59,12 @@ def run_agent(user_query: str, messages: list = None):
         })
 
     print("⚠️ Max iterations reached.")
-    return messages  # ← also return messages here, not None
+    return messages
 
 
 if __name__ == "__main__":
-    print(f" Data Analyst Agent")
-    print(f" File: {FILENAME}")
+    print(f"🤖 Data Analyst Agent")
+    print(f"📂 File: {FILENAME}")
     print(f"Type 'exit' to quit.\n")
 
     history = []
