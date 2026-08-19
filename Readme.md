@@ -267,22 +267,22 @@ This project is intended primarily as a learning and portfolio implementation.
 
 ##  Future Improvements
 
-* [ ] Secure sandboxed Python execution
-* [ ] Support for additional file formats
-* [ ] Improved chart generation
-* [ ] More robust code validation
-* [ ] Persistent conversation history
-* [ ] Dataset profiling before analysis
-* [ ] Streaming responses
-* [ ] Docker deployment
-* [ ] Automated tests
-* [ ] Production deployment
+*  Secure sandboxed Python execution
+*  Support for additional file formats
+*  Improved chart generation
+*  More robust code validation
+*  Persistent conversation history
+*  Dataset profiling before analysis
+*  Streaming responses
+*  Docker deployment
+*  Automated tests
+*  Production deployment
 
 ---
 
 ##  Author
 
-**Aishwarya H**
+**Aiswarya H**
 
 AI/ML | Generative AI | Machine Learning | Deep Learning
 
