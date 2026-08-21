@@ -35,7 +35,7 @@ The project implements an iterative agent workflow:
                           ▼
                    ┌─────────────┐
                    │     LLM     │
-                   │ LLaMA 3.3   │
+                   │ GPT-OSS 120B│
                    └──────┬──────┘
                           │
                           ▼
@@ -73,7 +73,7 @@ The key idea is an **iterative generate → execute → observe → retry loop**
 
 | Component     | Technology                 |
 | ------------- | -------------------------- |
-| LLM           | LLaMA 3.3 70B              |
+| LLM           | GPT-OSS 120B                |
 | LLM Provider  | Groq API                   |
 | Language      | Python                     |
 | Data Analysis | Pandas                     |
@@ -96,9 +96,9 @@ data-analyst-agent/
 │   └── ...                 # Data analysis / execution tools
 │
 ├── api.py                  # FastAPI backend
-├── app.py                  # Application entry point
+├── app_api_client.py       # Streamlit frontend (API mode — talks to api.py over HTTP)
 ├── main.py                 # Agent execution
-├── streamlit_app.py        # Streamlit interface
+├── streamlit_app.py        # Streamlit frontend (direct mode — calls the agent in-process)
 ├── requirements.txt        # Python dependencies
 ├── .gitignore
 └── README.md
@@ -150,16 +150,34 @@ GROQ_API_KEY=your_api_key_here
 
 **Never commit your API key to GitHub.**
 
-### 5. Start the FastAPI backend
+Groq's free tier covers this project's usage — no paid plan required.
+
+### 5. Run the app
+
+You can run this project two ways:
+
+#### Option 1: Direct mode (recommended, simplest)
+
+Streamlit calls the agent directly — no separate backend needed.
+
+```bash
+streamlit run streamlit_app.py
+```
+
+#### Option 2: API mode
+
+Runs a FastAPI backend that the Streamlit frontend calls over HTTP. Useful if you want to reuse the `/query` and `/upload` endpoints elsewhere (e.g. another frontend or service).
+
+Terminal 1 — start the backend:
 
 ```bash
 uvicorn api:app --reload
 ```
 
-### 6. Start the Streamlit application
+Terminal 2 — start the frontend:
 
 ```bash
-streamlit run streamlit_app.py
+streamlit run app_api_client.py
 ```
 
 Open the Streamlit URL shown in your terminal and upload a CSV or Excel file.
@@ -285,4 +303,3 @@ This project is intended primarily as a learning and portfolio implementation.
 **Aiswarya H**
 
 AI/ML | Generative AI | Machine Learning | Deep Learning
-
