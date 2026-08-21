@@ -2,6 +2,7 @@ groq
 python-dotenv
 pandas
 openpyxl
+xlrd
 fastapi
 uvicorn
 streamlit
