@@ -19,7 +19,7 @@ def call_llm(messages: list, system: str) -> str:
     """
     response = client.chat.completions.create(
         model="qwen/qwen3.6-27b",
-        max_tokens=4096,
+        max_tokens=1024,
         messages=[
             {"role": "system", "content": system},
             *messages
