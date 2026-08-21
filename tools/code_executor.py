@@ -8,13 +8,6 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from tools.chart_generate import save_chart
 
-# inside execute_code(), add to exec_globals:
-exec_globals = {
-    "pd": pd,
-    "os": os,
-    "plt": plt,
-    "matplotlib": matplotlib,
-}
 
 DATA_DIR = "data"
 
@@ -29,6 +22,8 @@ def execute_code(code: str, filename: str = None) -> str:
     exec_globals = {
         "pd": pd,
         "os": os,
+        "plt": plt,
+        "matplotlib": matplotlib,
     }
 
     # If a file is loaded, make `df` available in the environment
