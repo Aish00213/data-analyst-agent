@@ -25,6 +25,9 @@ def run_agent(user_query: str, messages: list = None, filename: str = None):
         print(f"--- Iteration {i+1} ---")
 
         response = call_llm(messages, SYSTEM_PROMPT)
+        if not response or not response.strip():
+            print("⚠️ Empty response from LLM, retrying...")
+            continue
         print(f"LLM: {response}\n")
 
         messages.append({"role": "assistant", "content": response})
