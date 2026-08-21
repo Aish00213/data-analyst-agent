@@ -30,15 +30,16 @@ def read_file(filename: str) -> str:
         null_count = df[col].isnull().sum()
         null_note = f"  ({null_count} nulls)" if null_count > 0 else ""
         lines.append(f"  - {col}: {df[col].dtype}{null_note}")
-
-    lines.append("Sample unique values per column (up to 5):")
-    for col in df.columns:
-        if isinstance(df[col].dtype, pd.StringDtype) or df[col].dtype == object:
-            unique_vals = df[col].dropna().unique()[:5].tolist()
-            lines.append(f"  - {col}: {unique_vals}")
-
+        
+    lines.append("Sample unique values per column (up to 5, first 15 text columns only):")
+    text_cols = [c for c in df.columns if df[c].dtype == object]
+    for col in text_cols[:15]:
+        unique_vals = df[col].dropna().unique()[:5].tolist()
+        lines.append(f"  - {col}: {unique_vals}")
+    if len(text_cols) > 15:
+        lines.append(f"  ...and {len(text_cols) - 15} more text columns omitted.")
+        
     lines.append("")
-    lines.append("First 5 rows (sample):")
-    lines.append(df.head(5).to_string(index=False))
-
+    lines.append("First 3 rows (sample):")
+    lines.append(df.head(3).to_string(index=False, max_cols=15))
     return "\n".join(lines)
