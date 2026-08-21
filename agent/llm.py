@@ -18,7 +18,7 @@ def call_llm(messages: list, system: str) -> str:
         The assistant's reply as a plain string
     """
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model="openai/gpt-oss-120b",
         max_tokens=4096,
         messages=[
             {"role": "system", "content": system},
