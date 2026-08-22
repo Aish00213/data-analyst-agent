@@ -6,7 +6,7 @@ from tools.code_executor import execute_code
 from tools.chart_generate import save_chart
 
 FILENAME = "business-financial-data-december-2025-quarter.csv"
-MAX_ITERATIONS = 10
+MAX_ITERATIONS = 10 
 
 def run_agent(user_query: str, messages: list = None, filename: str = None):
     if messages is None:
