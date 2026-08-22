@@ -62,6 +62,10 @@ def run_agent(user_query: str, messages: list = None, filename: str = None):
         })
 
     print("⚠️ Max iterations reached.")
+    messages.append({
+        "role": "assistant",
+        "content": "I wasn't able to finish analyzing this within the allowed steps. This usually means the file couldn't be read correctly — please check the uploaded file and try again."
+    })
     return messages
 
 
